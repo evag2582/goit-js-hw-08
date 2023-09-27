@@ -3,7 +3,7 @@ import throttle from 'lodash.throttle';
 
     let iframe = document.querySelector('iframe');
     const player = new Player(iframe);
-const throttle = require('lodash.throttle');
+    const throttle = require('lodash.throttle');
     
     player.on('play', function() {
         console.log('played the video!');
@@ -13,13 +13,10 @@ const throttle = require('lodash.throttle');
         console.log('title:', title);
     });
 
-     var throt_fun = throttle(function () {
-    const onPlay = function (data) {
+     var throt_fun = throttle(function (data) {
     const timeUpdate = data.seconds;
     localStorage.setItem("videoplayer-current-time", timeUpdate);
-    };
-    player.on('timeupdate', onPlay);
-    }, 100000);
+    }, 1000);
 
     player.on('timeupdate', throt_fun);
 
