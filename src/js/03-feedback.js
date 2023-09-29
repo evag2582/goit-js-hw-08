@@ -12,7 +12,7 @@ var _ = require('lodash.throttle');
       email: email.value,
       message: message.value
     }  
-    
+
     input.addEventListener("input", throttle(() => {
       localStorage.setItem('feedback-form-state', JSON.stringify(emailAndMessage));
     }, 500));
