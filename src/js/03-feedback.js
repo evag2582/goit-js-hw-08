@@ -12,18 +12,23 @@ const input = document.querySelector('.feedback-form');
       message: message.value
     }  
 
-    input.addEventListener("input", throttle(() => {
+    var throt_fun = throttle(function (data) {
       localStorage.setItem('feedback-form-state', JSON.stringify(emailAndMessage));
-    }, 500));
- 
+    }, 500);
+    
+    document.addEventListener('input', (e) => {
+      throt_fun();
+    });
+
   });
 
-input.addEventListener("submit", (e) => {
-  const savedJson = localStorage.getItem('feedback-form-state');
-  const saved = JSON.parse(savedJson);
+const savedJson = localStorage.getItem('feedback-form-state');
+const saved = JSON.parse(savedJson);
   
   input.elements.email.value = saved.email ?? "";
   input.elements.message.value = saved.message ?? "";
+
+input.addEventListener("submit", (e) => {
   e.preventDefault();
   console.log(saved);
    localStorage.removeItem('feedback-form-state');
